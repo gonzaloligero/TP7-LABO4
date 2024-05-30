@@ -2,32 +2,42 @@ package dominio;
 
 public class Seguro {
 	
-	private static int IDSeguro = 0;
+	private int IDSeguro;
 	private String Descripcion;
 	private int IDTipo;
 	private float CostoContratacion;
 	private float CostoAsegurado;
 	
+	public Seguro() {
+	
+	}
+
+	public Seguro(int iDSeguro, String descripcion, int iDTipo, float costoContratacion, float costoAsegurado) {
+		
+		IDSeguro = iDSeguro;
+		Descripcion = descripcion;
+		IDTipo = iDTipo;
+		CostoContratacion = costoContratacion;
+		CostoAsegurado = costoAsegurado;
+	}
+
+	
 	public Seguro(String descripcion, int iDTipo, float costoContratacion, float costoAsegurado) {
-		IDSeguro++;
+		
 		Descripcion = descripcion;
 		IDTipo = iDTipo;
 		CostoContratacion = costoContratacion;
 		CostoAsegurado = costoAsegurado;
 	}
 	
-	public Seguro() {
-		IDSeguro++;
-		this.Descripcion = "";
-		this.IDTipo = 0;
-		this.CostoContratacion = 0;
-		this.CostoAsegurado = 0;
-	}
-
-	public static int getIDSeguro() {
+	
+	public int getIDSeguro() {
 		return IDSeguro;
 	}
 
+	public void setIDSeguro(int iDSeguro) {
+		IDSeguro = iDSeguro;
+	}
 
 	public String getDescripcion() {
 		return Descripcion;
@@ -63,9 +73,15 @@ public class Seguro {
 
 	@Override
 	public String toString() {
-		return "Seguro [Descripcion=" + Descripcion + ", IDTipo=" + IDTipo + ", CostoContratacion=" + CostoContratacion
-				+ ", CostoAsegurado=" + CostoAsegurado + "]";
+		return IDSeguro + ", " + Descripcion + ", " + IDTipo + ", " + CostoContratacion + ", " + CostoAsegurado + "\n";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
