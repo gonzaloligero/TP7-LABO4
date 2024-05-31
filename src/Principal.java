@@ -1,13 +1,17 @@
-import dao.SeguroDao;
+
+import dao.TipoSeguroDao;
 
 
 public class Principal {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		SeguroDao sDao = new SeguroDao();
 		
-		System.out.println(sDao.obtenerUsuarios());
+		//SeguroDao sDao = new SeguroDao();
+		TipoSeguroDao tsDao = new TipoSeguroDao();
+		
+
+		//System.out.println(sDao.obtenerUsuarios());
+		System.out.println(tsDao.listarSeguros());
 		
 		//int f = sDao.agregarSeguro(new Seguro("Segupor por recursar", 3, 900, 1700));
 	}
