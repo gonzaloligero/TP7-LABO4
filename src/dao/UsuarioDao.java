@@ -8,8 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dominio.Seguro;
+import dominio.Usuario;
 
-public class SeguroDao {
+public class UsuarioDao {
 
 	
 	private String host = "jdbc:mysql://localhost:3306/";
@@ -18,7 +19,7 @@ public class SeguroDao {
 	private String dbName = "segurosgroup";
 	
 	
-	public ArrayList<Seguro> obtenerSeguros() {
+	public ArrayList<Usuario> obtenerUsuarios() {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -27,25 +28,26 @@ public class SeguroDao {
 			e.printStackTrace();
 		}
 		
-		ArrayList<Seguro> lista = new ArrayList<Seguro>();
+		ArrayList<Usuario> lista = new ArrayList<Usuario>();
 		Connection conn = null;
 		try{
 			conn = DriverManager.getConnection(host + dbName, user, pass);
 			Statement st = conn.createStatement();
 			
-			ResultSet rs = st.executeQuery("Select idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado FROM seguros");
+			ResultSet rs = st.executeQuery("Select nombreUsuario, pass, tipoUsuario, dni, nombre, apellido FROM usuarios");
 			
 			while(rs.next()){
 				
-				Seguro seguroRs = new Seguro();
-				seguroRs.setIDSeguro(rs.getInt("idSeguro"));
-				seguroRs.setDescripcion(rs.getString("descripcion"));
-				seguroRs.setIDTipo(rs.getInt("idTipo"));
-				seguroRs.setCostoContratacion(rs.getFloat("costoContratacion"));
-				seguroRs.setCostoAsegurado(rs.getFloat("costoAsegurado"));
+				Usuario usuarioRs = new Usuario();
+				usuarioRs.setNombreUsuario(rs.getString("nombreUsuario"));
+				usuarioRs.setPass(rs.getString("pass"));
+				usuarioRs.setTipoUsuario(rs.getInt("tipoUsuario"));
+				usuarioRs.setDni(rs.getString("dni"));
+				usuarioRs.setNombre(rs.getString("nombre"));
+				usuarioRs.setApellido(rs.getString("apellido"));
 				
 				
-				lista.add(seguroRs);
+				lista.add(usuarioRs);
 			}
 			conn.close();
 		}catch(Exception e){
@@ -57,7 +59,7 @@ public class SeguroDao {
 		return lista;
 	}
 	
-	public int agregarSeguro(Seguro seg)
+	public int agregarUsuario(Usuario seg)
 	{
 		
 		try {
@@ -74,7 +76,7 @@ public class SeguroDao {
 		{
 			cn = DriverManager.getConnection(host+dbName, user,pass);
 			Statement st = cn.createStatement();
-			String query = "Insert into seguros(descripcion,idTipo, costoContratacion, costoAsegurado) values('"   +seg.getDescripcion()+"','"+seg.getIDTipo()+ "','"+seg.getCostoAsegurado()+ "','"+seg.getCostoAsegurado()+   "')";
+			String query = "Insert into usuarios (nombreUsuario, pass, tipoUsuario, dni, nombre, apellido) values('"   +seg.getNombreUsuario()+"','"+seg.getPass()+ "','"+seg.getTipoUsuario()+ "','"+seg.getDni()+ "','" + seg.getNombre() + "','" + seg.getApellido() +  "')";
 			filas=st.executeUpdate(query);
 		}
 		catch(Exception e)

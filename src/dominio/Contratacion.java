@@ -51,8 +51,7 @@ public class Contratacion {
 	
 	@Override
 	public String toString() {
-		return "Contratacion [NombreUsuario=" + NombreUsuario + ", IdSeguro=" + IdSeguro + ", CostoContratacion="
-				+ CostoContratacion + "]";
+		return "nombreUsuario: " + NombreUsuario + ",  IdSeguro: " + IdSeguro + ",  CostoContratacion: "+ CostoContratacion;
 	}
 	
 }

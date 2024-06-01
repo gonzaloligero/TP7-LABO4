@@ -1,10 +1,10 @@
 package dominio;
 
 public class TipoSeguros {
-	 private int idTipo;
+	    private int idTipo;
 	    private String descripcion;
 
-	   // Constructores
+	  
 	    public TipoSeguros() {}
 
 	    
@@ -42,11 +42,12 @@ public class TipoSeguros {
 
 	@Override
 	public String toString() {
-		return "TipoSeguros [idTipos=" + idTipo + ", descripcion=" + descripcion + "]";
+		return "TipoSeguros idTipos=" + idTipo + ", descripcion=" + descripcion + "\n";
 	}
 	
 	
-	
+ 
+
 	
 	
 	
