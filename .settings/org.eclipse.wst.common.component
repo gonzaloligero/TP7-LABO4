@@ -2,6 +2,7 @@
     <wb-module deploy-name="TP7_GRUPO3">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/"/>
         <property name="context-root" value="TP7_GRUPO3"/>
         <property name="java-output-path" value="/TP7_GRUPO3/build/classes"/>
     </wb-module>
