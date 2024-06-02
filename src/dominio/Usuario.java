@@ -19,6 +19,15 @@ public class Usuario {
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
+	
+	public Usuario() {
+		this.nombreUsuario = "";
+		this.pass = "";
+		this.tipoUsuario = 0;
+		this.dni = "";
+		this.nombre = "";
+		this.apellido = "";
+	}
 
 
 	public String getNombreUsuario() {
@@ -73,6 +82,10 @@ public class Usuario {
 
 	public String getDni() {
 		return dni;
+	}
+	
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 
