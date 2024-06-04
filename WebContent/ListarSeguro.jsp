@@ -1,9 +1,12 @@
-<%@page import="dao.TipoSeguroDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="dao.TipoSeguroDao"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="dominio.Seguro" %>
+<%@ page import="dominio.TipoSeguros" %>
+<%@ page import="java.util.List" %>
 <%@ page import="dao.SeguroDao" %>
 <%
+	TipoSeguroDao tsDao = new TipoSeguroDao();
     SeguroDao seguroDao = new SeguroDao();
     ArrayList<Seguro> listaSeguros = seguroDao.obtenerSeguros();
 %>
@@ -25,6 +28,19 @@
     if (listaSeguros != null && !listaSeguros.isEmpty()) {
 %>
 
+
+Busqueda por tipo de seguros:<select name="tipoSeguro">
+    <%
+    List<TipoSeguros> listaSegurosT = tsDao.listarSeguros();
+    if(listaSeguros!=null)
+    for (TipoSeguros Tseguro : listaSegurosT) {
+    %>
+        <option value=<%= Tseguro.getIdTipo() %>><%= Tseguro.getDescripcion() %></option>
+    <%
+    }
+    %>
+</select>
+<input type="submit" value="Filtrar" name="btnFiltrar"><br>
 
 <table border="1">
     <tr>
