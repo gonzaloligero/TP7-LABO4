@@ -50,5 +50,29 @@ public class TipoSeguroDao {
       return lista;
 		
 	}
+	public int obtenerUltimoId() {
+        int ultimoId = 0; 
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(host + dbName, user, pass);
+            Statement st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("SELECT MAX(idTipo) AS maxId FROM segurosgroup.tiposeguros;");
+
+            if (rs.next()) {
+                ultimoId = rs.getInt("maxId");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            
+        }
+
+        return ultimoId;
+    }
+	
+	
 }
 

@@ -18,6 +18,7 @@ public class Principal {
 		//System.out.println(sDao.obtenerUsuarios());
 		//System.out.println(tsDao.listarSeguros());
 		System.out.println(tsDao2.listarContratacion());
+		System.out.println("Test");
 		
 		//int f = sDao.agregarSeguro(new Seguro("Segupor por recursar", 3, 900, 1700));
 	}

@@ -18,7 +18,7 @@ public class SeguroDao {
 	private String dbName = "segurosgroup";
 	
 	
-	public ArrayList<Seguro> obtenerUsuarios() {
+	public ArrayList<Seguro> obtenerSeguros() {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
