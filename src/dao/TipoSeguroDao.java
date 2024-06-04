@@ -74,5 +74,30 @@ public class TipoSeguroDao {
     }
 	
 	
+    public String obtenerDescripcion(int id) {
+        String descripcion = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(host + dbName, user, pass);
+            Statement st = conn.createStatement();
+
+            String query = "SELECT descripcion FROM tiposeguros WHERE idTipo = " + id + ";";
+            ResultSet rs = st.executeQuery(query);
+
+            if (rs.next()) {
+                descripcion = rs.getString("descripcion");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            
+        }
+
+        return descripcion;
+    }
+	
+	
 }
 

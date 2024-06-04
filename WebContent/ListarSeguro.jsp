@@ -1,3 +1,4 @@
+<%@page import="dao.TipoSeguroDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="dominio.Seguro" %>
@@ -24,6 +25,7 @@
     if (listaSeguros != null && !listaSeguros.isEmpty()) {
 %>
 
+
 <table border="1">
     <tr>
         <th>ID Seguro</th>
@@ -34,11 +36,12 @@
     </tr>
 <%
         for (Seguro seguro : listaSeguros) {
+        	TipoSeguroDao ts = new TipoSeguroDao();
 %>
     <tr>
         <td><%= seguro.getIDSeguro() %></td>
         <td><%= seguro.getDescripcion() %></td>
-        <td><%= seguro.getIDTipo() %></td>
+        <td><%= ts.obtenerDescripcion(seguro.getIDTipo()) %></td>
         <td><%= seguro.getCostoContratacion() %></td>
         <td><%= seguro.getCostoAsegurado() %></td>
     </tr>
