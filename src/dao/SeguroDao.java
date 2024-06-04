@@ -74,7 +74,7 @@ public class SeguroDao {
 		{
 			cn = DriverManager.getConnection(host+dbName, user,pass);
 			Statement st = cn.createStatement();
-			String query = "Insert into seguros(descripcion,idTipo, costoContratacion, costoAsegurado) values('"   +seg.getDescripcion()+"','"+seg.getIDTipo()+ "','"+seg.getCostoAsegurado()+ "','"+seg.getCostoAsegurado()+   "')";
+			String query = "Insert into seguros(descripcion,idTipo, costoContratacion, costoAsegurado) values('"   +seg.getDescripcion()+"','"+seg.getIDTipo()+ "','"+seg.getCostoContratacion()+ "','"+seg.getCostoAsegurado()+   "')";
 			filas=st.executeUpdate(query);
 		}
 		catch(Exception e)

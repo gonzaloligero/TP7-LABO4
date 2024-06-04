@@ -58,7 +58,7 @@ public class TipoSeguroDao {
             Connection conn = DriverManager.getConnection(host + dbName, user, pass);
             Statement st = conn.createStatement();
 
-            ResultSet rs = st.executeQuery("SELECT MAX(idTipo) AS maxId FROM segurosgroup.tiposeguros;");
+            ResultSet rs = st.executeQuery("SELECT MAX(idSeguro)as maxId FROM seguros;");
 
             if (rs.next()) {
                 ultimoId = rs.getInt("maxId");
