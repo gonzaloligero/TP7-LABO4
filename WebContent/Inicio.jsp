@@ -6,13 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Inicio</title>
 </head>
-<body>
+ <body>
 
-<a href="Inicio.jsp">Inicio</a>
-<a href="AgregarSeguro.jsp" style="margin-left: 10px;">Agregar Seguro</a>
-<a href="ListarSeguro.jsp" style="margin-left: 10px;">Lista Seguros</a>
+   <a href="Inicio.jsp">Inicio</a>
+   <a href="AgregarSeguro.jsp" style="margin-left: 10px;">Agregar Seguro</a>
+   <a href="ListarSeguro.jsp" style="margin-left: 10px;">Lista Seguros</a>
 
-<h1>Soy la página inicio</h1>
+   <h1>Soy la página inicio</h1>
 
-</body>
+ </body>
 </html>

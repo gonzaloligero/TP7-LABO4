@@ -2,14 +2,12 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import dao.SeguroDao;
 import dominio.Seguro;
 
@@ -22,71 +20,136 @@ public class servletSeguro extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int filas = 0;
-		if(request.getParameter("btnAceptar")!= null)
-		{
-			Seguro s = new Seguro();
-			s.setDescripcion(request.getParameter("txtDescripcion"));
-            s.setIDTipo(Integer.parseInt(request.getParameter("tipoSeguro")));
-            s.setCostoContratacion(Float.parseFloat(request.getParameter("txtCostoContratacion")));
-            s.setCostoAsegurado(Float.parseFloat(request.getParameter("txtcostoMaximoAsegurado")));
-			
-			SeguroDao sDao = new SeguroDao();
-			filas = sDao.agregarSeguro(s);
-		}
-		
-		request.setAttribute("cantFilas", filas);
-		RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");//Colocar el nombre del jsp
-		rd.forward(request, response);
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+     
     	
-    	
-    	
-    	
-    	
-        SeguroDao seguroDao = new SeguroDao();
-        ArrayList<Seguro> listaSeguros = seguroDao.obtenerSeguros();
-        
-        request.setAttribute("listaSeguros", listaSeguros);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ListarSeguro.jsp");
-        dispatcher.forward(request, response);
-        
+    	// Aquí puedes manejar otras acciones que no sean guardar
     }
-
-
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    	
-    	String descripcion = request.getParameter("txtDescripcion");
-        int idTipo = Integer.parseInt(request.getParameter("tipoSeguro"));
-        float costoContratacion = Float.parseFloat(request.getParameter("txtCostoContratacion"));
-        float costoMaximoAsegurado = Float.parseFloat(request.getParameter("txtCostoMaximoAsegurado"));
+       
+    	int filas = 0;
+        boolean aviso = false;
+        int aviso2 =  0;
 
-        Seguro seguro = new Seguro();
-        seguro.setDescripcion(descripcion);
-        seguro.setIDTipo(idTipo);
-        seguro.setCostoContratacion(costoContratacion);
-        seguro.setCostoAsegurado(costoMaximoAsegurado);
+        if (request.getParameter("btnAceptar") != null) {
+        	 
+               Seguro s = new Seguro();
+               String descripcion = request.getParameter("txtDescripcion");
+               if (descripcion == null || descripcion.trim().isEmpty()) {
+            	   aviso = true;
+            	   request.setAttribute("aviso", aviso);
+                   RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+                   rd.forward(request, response);
+                   return ;
+               } else {
+                   s.setDescripcion(descripcion);
+                 }
 
-        SeguroDao seguroDao = new SeguroDao();
-        int result = seguroDao.agregarSeguro(seguro);
-        
-        if (result > 0) {
             
-            response.sendRedirect("servletSeguro");
-        } else {
-            response.getWriter().write("Error al agregar el seguro");
+               String tipoSeguroStr = request.getParameter("tipoSeguro");
+               if (tipoSeguroStr == null || tipoSeguroStr.trim().isEmpty()) {
+              	   aviso = true;
+            	   request.setAttribute("aviso", aviso);
+                   RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+                   rd.forward(request, response);
+                   return;
+               } else {
+                      try {
+                          int tipoSeguro = Integer.parseInt(tipoSeguroStr);
+                          s.setIDTipo(tipoSeguro);
+                      } catch (NumberFormatException e) {
+                          aviso = true;
+                	      request.setAttribute("aviso", aviso);
+                          RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+                          rd.forward(request, response);
+                          return;
+                        }
+                 }
+
+            
+               String costoContratacionStr = request.getParameter("txtCostoContratacion");
+               if (costoContratacionStr == null || costoContratacionStr.trim().isEmpty()) {
+            	   aviso = true;
+            	   request.setAttribute("aviso", aviso);
+                   RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+                   rd.forward(request, response);
+                   return;
+               } else {
+                      try {
+                	      float costoContratacion = Float.parseFloat(costoContratacionStr);               	
+                          if (costoContratacion < 0) {                  	
+                    	     aviso2 = 1;                  	
+                             request.setAttribute("aviso2", aviso2);
+                             RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+                             rd.forward(request, response);
+                             return;
+                          } else { 
+                    	
+                               s.setCostoContratacion(costoContratacion);
+                       
+                            }
+                      } catch (NumberFormatException e) {
+                	       aviso = true;
+                	       request.setAttribute("aviso", aviso);
+                           RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+                           rd.forward(request, response);
+                           return;
+                        }
+                 }
+
+            
+               String costoAseguradoStr = request.getParameter("txtcostoMaximoAsegurado");
+               if (costoAseguradoStr == null || costoAseguradoStr.trim().isEmpty()) {
+            	   aviso = true;
+            	   request.setAttribute("aviso", aviso);
+                   RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+                   rd.forward(request, response);
+                   return;
+               } else {
+                       try {
+                	
+                	         float costoAsegurado = Float.parseFloat(costoAseguradoStr);               
+                             if (costoAsegurado < 0) {
+                    	        aviso2 = 1;
+                                request.setAttribute("aviso2", aviso2);
+                                RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+                                rd.forward(request, response);
+                                return;
+                             } else { 
+                    	
+                    	           s.setCostoAsegurado(costoAsegurado);
+                       
+                             }             	       
+                   
+                       } catch (NumberFormatException e) {
+                	       aviso = true;
+                	       request.setAttribute("aviso", aviso);
+                           RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+                           rd.forward(request, response);
+                           return;
+                         }
+                 }
+     
+               SeguroDao sDao = new SeguroDao();
+               filas = sDao.agregarSeguro(s);
+               request.setAttribute("cantFilas", filas);
+               RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
+               rd.forward(request, response);
+               
+        }
+        	
+        
+        
+        
+        if (request.getParameter("btnFiltrar") != null) {
+        	
+            int idTipo = Integer.parseInt(request.getParameter("tipoSeguro"));
+            SeguroDao seguroDao = new SeguroDao();
+            ArrayList<Seguro> listaSeguros = seguroDao.obtenerSegurosPorTipo(idTipo);
+            request.setAttribute("listaS", listaSeguros);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ListarSeguro.jsp");
+            dispatcher.forward(request, response);
         }
         
-        
     }
-
-
 }
