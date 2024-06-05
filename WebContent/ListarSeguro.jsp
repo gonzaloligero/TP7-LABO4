@@ -15,8 +15,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Lista Seguros</title>
+<style>
+    table {
+        width: 100%;  
+        border: 1px solid #000;    
+    }
+    th, td {
+        border: 1px solid #000;        
+    }
+</style>
 </head>
- <body>
+<body>
 
    <a href="Inicio.jsp">Inicio</a>
    <a href="AgregarSeguro.jsp" style="margin-left: 10px;">Agregar Seguro</a>
@@ -25,11 +34,11 @@
    <h2>Lista de Seguros</h2>
 
    <form method="post" action="servletSeguro">
-        Busqueda por tipo de seguros:
+        Búsqueda por tipo de seguros:
         <select name="tipoSeguro">
            <%
            List<TipoSeguros> listaSegurosT = tsDao.listarSeguros();
-           if(listaSegurosT != null) {
+           if (listaSegurosT != null) {
                for (TipoSeguros Tseguro : listaSegurosT) {
            %>
                  <option value="<%= Tseguro.getIdTipo() %>"><%= Tseguro.getDescripcion() %></option>
@@ -40,9 +49,9 @@
         </select>
         <input type="submit" value="Filtrar" name="btnFiltrar"><br>
    </form>
-
+	<br><br>
    <%
-   if(request.getAttribute("listaS") != null) {
+   if (request.getAttribute("listaS") != null) {
         listaSeguros = (ArrayList<Seguro>)request.getAttribute("listaS");
    }
    %>
@@ -50,17 +59,17 @@
    <%
    if (listaSeguros != null && !listaSeguros.isEmpty()) {
    %>
-   <table border="1">
+   <table>
       <tr>
-          <th>ID Seguro</th>
-          <th>Descripción</th>
-          <th>ID Tipo</th>
-          <th>Costo de Contratación</th>
-          <th>Costo Asegurado</th>
+          <th style="width: 5%;">ID Seguro</th>
+          <th style="width: 60%;">Descripción</th>
+          <th style="width: 15%;">Descripcion Tipo</th>
+          <th style="width: 10%;">Costo de Contratación</th>
+          <th style="width: 10%;">Costo Asegurado</th>
       </tr>
    <%
         for (Seguro seguro : listaSeguros) {
-        	TipoSeguroDao ts = new TipoSeguroDao();
+            TipoSeguroDao ts = new TipoSeguroDao();
    %>
           <tr>
              <td><%= seguro.getIDSeguro() %></td>
@@ -81,6 +90,7 @@
    %>
    </table>
 
- </body>
+</body>
 </html>
+
 
